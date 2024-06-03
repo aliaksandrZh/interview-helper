@@ -1,18 +1,37 @@
 services:
-  # mysql:
-  #   image: mysql
-  #   container_name: mysql_db
-  #   environment:
-  #     MYSQL_ROOT_PASSWORD: rootpassword
-  #     MYSQL_DATABASE: nestdb
-  #   ports:
-  #     - '3306:3306'
-  #   volumes:
-  #     - ./db/:/var/lib/mysql
+  #   mysql:
+  #     image: mysql
+  #     restart: always
+  #     container_name: mysql
+  #     environment:
+  #       MYSQL_ROOT_PASSWORD: rootpassword
+  #       MYSQL_DATABASE: nestdb
+  #     # ports:
+  #     #   - '3306:3306'
+  #     volumes:
+  #       - ./db/:/var/lib/mysql
+
+  #   adminer:
+  #     image: adminer
+  #     container_name: adminer
+  #     restart: always
+  #     ports:
+  #       - 7777:8080
+
+  #   phpmyadmin:
+  #     image: phpmyadmin
+  #     container_name: phpmyadmin
+  #     restart: always
+  #     ports:
+  #       - 5555:80
+  #     environment:
+  #       - PMA_ARBITRARY=1
 
   nestjs:
-    container_name: nestjs_api
-    build: .
+    container_name: api
+    build:
+      context: .
+      target: local
     environment:
       - PORT=3000
       - DB_HOST=mysql_db
@@ -21,9 +40,8 @@ services:
       - DB_NAME=nestdb
     volumes:
       - .:/app
-      - ./node_modules:/app/node_modules
+      - '/app/node_modules'
     ports:
       - '8888:3000'
-    # command: 'yarn && yarn run start:dev'
     # depends_on:
     #   - mysql

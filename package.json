@@ -1,6 +1,6 @@
 {
   "name": "interview-helper-api",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "",
   "author": "",
   "private": true,
@@ -18,8 +18,9 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "drizzle:generate": "drizzle-kit generate",
-    "drizzle:migrate": "drizzle-kit migrate"
+    "drizzle:migrate": "drizzle-kit migrate",
+    "drizzle:generate": "drizzle-kit generate"
+
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",
@@ -28,8 +29,8 @@
     "@planetscale/database": "^1.18.0",
     "drizzle-orm": "^0.31.0",
     "mysql2": "^3.10.0",
-    "reflect-metadata": "^0.2.0",
-    "rxjs": "^7.8.1"
+    "rxjs": "^7.8.1",
+    "reflect-metadata": "^0.2.0"
   },
   "devDependencies": {
     "@nestjs/cli": "^10.0.0",
