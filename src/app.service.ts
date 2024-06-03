@@ -1,11 +1,10 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { DrizzleToken } from './drizzle/drizzle.definition';
-import { Database } from './drizzle/drizzle.interface';
 import { Question, questions } from './drizzle/schemas';
+import { Database } from './drizzle/drizzle.provider';
 
 @Injectable()
 export class AppService {
-  constructor(@Inject(DrizzleToken) private db: Database) {}
+  constructor(@Inject('DB') private db: Database) {}
   getHello(): string {
     return 'Hello World!';
   }

@@ -1,18 +1,11 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { DBConfigService } from './drizzle/drizzle.config';
-import { DrizzlePlanetScaleModule } from './drizzle/drizzle.module';
-import { DrizzleToken } from './drizzle/drizzle.definition';
+import { DrizzleProvider } from './drizzle/drizzle.provider';
 
 @Module({
-  imports: [
-    DrizzlePlanetScaleModule.registerAsync({
-      tag: DrizzleToken,
-      useClass: DBConfigService,
-    }),
-  ],
+  imports: [],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, DrizzleProvider],
 })
 export class AppModule {}
