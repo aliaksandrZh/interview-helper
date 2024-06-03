@@ -29,6 +29,20 @@
       "when": 1717443073512,
       "tag": "0003_certain_cannonball",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1717445208012,
+      "tag": "0004_soft_hobgoblin",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "5",
+      "when": 1717445781188,
+      "tag": "0005_sweet_wild_pack",
+      "breakpoints": true
     }
   ]
 }
