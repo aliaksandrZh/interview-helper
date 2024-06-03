@@ -1,6 +1,6 @@
 ## Run
 
-Run the command for starting the project `docker compose up`
+ `docker compose up`
 
 ## Migrations
 
