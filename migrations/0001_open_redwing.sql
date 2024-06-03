@@ -1,0 +1,1 @@
+ALTER TABLE `Questions` RENAME COLUMN `name` TO `text`;
