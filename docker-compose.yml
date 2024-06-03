@@ -38,6 +38,7 @@ services:
       - DB_PORT=3306
       - DB_PASSWORD=rootpassword
       - DB_NAME=nestdb
+      - DB_USER=root
     volumes:
       - .:/app
       - '/app/node_modules'
