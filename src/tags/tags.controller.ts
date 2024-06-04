@@ -4,28 +4,29 @@ import {
   Delete,
   Get,
   Param,
+  ParseIntPipe,
   Post,
   Put,
 } from '@nestjs/common';
-import { Tag, TagCandidate } from 'src/drizzle/schemas';
 import { TagsService } from './tags.service';
-// TODO: Vaildate request body
+import { TagCreateDto, TagUpdateDto } from './tags.dto';
+
 @Controller('tags')
 export class TagsController {
   constructor(private tagsService: TagsService) {}
 
   @Post()
-  create(@Body() tag: TagCandidate) {
+  create(@Body() tag: TagCreateDto) {
     return this.tagsService.create(tag);
   }
 
   @Put()
-  update(@Body() tag: Tag) {
+  update(@Body() tag: TagUpdateDto) {
     return this.tagsService.update(tag);
   }
 
   @Delete(':id')
-  delete(@Param('id') id: Tag['id']) {
+  delete(@Param('id', ParseIntPipe) id: number) {
     return this.tagsService.delete(id);
   }
 
