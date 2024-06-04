@@ -1,5 +1,5 @@
 import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
-import { eq } from 'drizzle-orm';
+import { like, eq } from 'drizzle-orm';
 import { Database } from 'src/drizzle/drizzle.interface';
 import { DBToken } from 'src/drizzle/drizzle.provider';
 import { Tag, TagCandidate, tags } from 'src/drizzle/schemas';
@@ -10,7 +10,7 @@ export class TagsRepository {
 
   async create(tag: TagCandidate): Promise<void> {
     const existedTag = await this.db.query.tags.findFirst({
-      where: eq(tags.text, tag.text),
+      where: like(tags.text, tag.text),
     });
     if (existedTag) {
       throw new HttpException(
