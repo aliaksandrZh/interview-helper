@@ -28,8 +28,9 @@ const initializeDB = async () => {
 };
 
 export type Database = MySql2Database<Record<string, never>>;
+export const DBToken = 'DB_TOKEN_DRIZZLE';
 
 export const DrizzleProvider = {
-  provide: 'DB',
+  provide: DBToken,
   useFactory: async () => await initializeDB(),
 };

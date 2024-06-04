@@ -1,7 +1,7 @@
 services:
   mysql:
     image: mysql
-    restart: always
+    # restart: always
     container_name: mysql
     environment:
       MYSQL_ROOT_PASSWORD: rootpassword
@@ -21,7 +21,7 @@ services:
   phpmyadmin:
     image: phpmyadmin
     container_name: phpmyadmin
-    restart: always
+    # restart: always
     ports:
       - 5555:80
     environment:

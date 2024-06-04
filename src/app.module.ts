@@ -1,11 +1,12 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { DrizzleProvider } from './drizzle/drizzle.provider';
+import { TagsModule } from './tags/tags.module';
+import { DrizzleModule } from './drizzle/drizzle.module';
 
 @Module({
-  imports: [],
+  imports: [DrizzleModule, TagsModule],
   controllers: [AppController],
-  providers: [AppService, DrizzleProvider],
+  providers: [AppService],
 })
 export class AppModule {}
