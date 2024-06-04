@@ -1,12 +1,18 @@
 ## Run
 
- `docker compose up`
+`docker compose up`
 
 ## Migrations
 
 Generate migrations `bash generate.sh`
 
 Apply migrations `bash migrate.sh`
+
+## Swagger
+
+Swagger `localhost:8888/api`
+
+JSON version: `localhost:8888/api-json`
 
 ## Errors
 
