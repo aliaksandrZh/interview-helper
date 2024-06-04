@@ -1,9 +1,8 @@
-import { MySql2Database, drizzle } from 'drizzle-orm/mysql2';
+import { drizzle } from 'drizzle-orm/mysql2';
 import * as mysql from 'mysql2/promise';
-import { dbCredentials } from '../../drizzle.config';
 import { catchError, firstValueFrom, from, map, retry } from 'rxjs';
-
-export type DatabaseType = MySql2Database<Record<string, never>>;
+import { dbCredentials } from '../../drizzle.config';
+import * as schema from './schemas';
 
 const initializeDB = async () => {
   const db = await firstValueFrom(
@@ -20,14 +19,14 @@ const initializeDB = async () => {
       retry({
         delay: 5000,
       }),
-      map((connection) => drizzle(connection)),
+      map((connection) =>
+        drizzle(connection, { schema: { ...schema }, mode: 'default' }),
+      ),
     ),
   );
-  // const db = drizzle(connection);
   return db;
 };
 
-export type Database = MySql2Database<Record<string, never>>;
 export const DBToken = 'DB_TOKEN_DRIZZLE';
 
 export const DrizzleProvider = {
