@@ -6,3 +6,4 @@ export const questions = mysqlTable('Questions', {
 });
 
 export type Question = typeof questions.$inferSelect;
+export type QuestionCandidate = Omit<Question, 'id'>;
