@@ -5,7 +5,7 @@ import { DBToken } from 'src/drizzle/drizzle.provider';
 import { Answer, AnswerCandidate, answers } from 'src/drizzle/schemas';
 
 @Injectable()
-export class AnswersRepository {
+export class AnswersRepositoryService {
   constructor(@Inject(DBToken) private db: Database) {}
 
   async create(answer: AnswerCandidate) {

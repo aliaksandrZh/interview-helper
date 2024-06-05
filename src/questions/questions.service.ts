@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { QuestionRepository } from './questions.repository';
+import { QuestionRepositoryService } from './questions.repository';
 import { Question, QuestionCandidate } from 'src/drizzle/schemas';
 
 @Injectable()
 export class QuestionsService {
-  constructor(private repo: QuestionRepository) {}
+  constructor(private repo: QuestionRepositoryService) {}
   //TODO: Get
 
   create(questionCandidate: QuestionCandidate): Promise<void> {

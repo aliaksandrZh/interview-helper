@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { TagsRepository } from './tags.repository';
+import { TagsRepositoryService } from './tags.repository';
 import { Tag, TagCandidate } from 'src/drizzle/schemas';
 
 @Injectable()
 export class TagsService {
-  constructor(private repo: TagsRepository) {}
+  constructor(private repo: TagsRepositoryService) {}
 
   create(tag: TagCandidate): Promise<void> {
     return this.repo.create(tag);

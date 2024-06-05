@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { AnswersRepository } from './answers.repository';
+import { AnswersRepositoryService } from './answers.repository';
 import { Answer, AnswerCandidate } from 'src/drizzle/schemas';
 
 @Injectable()
 export class AnswersService {
-  constructor(private repo: AnswersRepository) {}
+  constructor(private repo: AnswersRepositoryService) {}
 
   create(answerCandidate: AnswerCandidate): Promise<void> {
     // TODO: map with question

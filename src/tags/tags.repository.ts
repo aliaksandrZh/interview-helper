@@ -5,7 +5,7 @@ import { DBToken } from 'src/drizzle/drizzle.provider';
 import { Tag, TagCandidate, tags } from 'src/drizzle/schemas';
 
 @Injectable()
-export class TagsRepository {
+export class TagsRepositoryService {
   constructor(@Inject(DBToken) private db: Database) {}
 
   async create(tag: TagCandidate): Promise<void> {
