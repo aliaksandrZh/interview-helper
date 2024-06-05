@@ -1,15 +1,24 @@
 services:
   mysql:
+    #   build:
+    #     context: .
+    #     dockerfile: Mysql.Dockerfile
     image: mysql
     # restart: always
     container_name: mysql
     environment:
       MYSQL_ROOT_PASSWORD: rootpassword
       MYSQL_DATABASE: nestdb
+      # DB_HOST: mysql
+      # DB_USER: root
     # ports:
     #   - '3306:3306'
+    # stop_grace_period: 30s
     volumes:
-      - ./db/:/var/lib/mysql
+      - mysql_data:/var/lib/mysql
+      # - ./backups:/var/backups/mysql
+    # command:
+    #   ['sh', '-c', "trap 'sh /usr/local/bin/backup.sh' EXIT; exec mysqld"]
 
   # adminer:
   #   image: adminer
@@ -51,3 +60,6 @@ services:
     depends_on:
       - mysql
     command: yarn run start:debug
+
+volumes:
+  mysql_data:
