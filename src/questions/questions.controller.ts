@@ -25,14 +25,14 @@ export class QuestionsController {
   @Post()
   @ApiCreatedResponse()
   @ApiConflictResponse()
-  create(@Body() answer: QuestionCreateDto) {
-    return this.questionService.create(answer);
+  create(@Body() question: QuestionCreateDto) {
+    return this.questionService.create(question);
   }
 
   @Put()
   @ApiAcceptedResponse()
-  update(@Body() answer: QuestionUpdateDto) {
-    return this.questionService.update(answer);
+  update(@Body() question: QuestionUpdateDto) {
+    return this.questionService.update(question);
   }
 
   @Delete(':id')

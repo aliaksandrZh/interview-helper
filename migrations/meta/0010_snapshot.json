@@ -1,0 +1,314 @@
+{
+  "version": "5",
+  "dialect": "mysql",
+  "id": "31e60173-0031-44b2-9b65-680fd9d0a19a",
+  "prevId": "e31741e0-bcf5-49c2-bfc9-7b4e91db4f08",
+  "tables": {
+    "Answers": {
+      "name": "Answers",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "text": {
+          "name": "text",
+          "type": "varchar(500)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "Answers_id": {
+          "name": "Answers_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {
+        "Answers_text_unique": {
+          "name": "Answers_text_unique",
+          "columns": [
+            "text"
+          ]
+        }
+      }
+    },
+    "Categories": {
+      "name": "Categories",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "text": {
+          "name": "text",
+          "type": "varchar(15)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "Categories_id": {
+          "name": "Categories_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {
+        "Categories_text_unique": {
+          "name": "Categories_text_unique",
+          "columns": [
+            "text"
+          ]
+        }
+      }
+    },
+    "Questions": {
+      "name": "Questions",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "text": {
+          "name": "text",
+          "type": "varchar(500)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "category": {
+          "name": "category",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "Questions_category_Categories_id_fk": {
+          "name": "Questions_category_Categories_id_fk",
+          "tableFrom": "Questions",
+          "tableTo": "Categories",
+          "columnsFrom": [
+            "category"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "Questions_id": {
+          "name": "Questions_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {
+        "Questions_text_unique": {
+          "name": "Questions_text_unique",
+          "columns": [
+            "text"
+          ]
+        }
+      }
+    },
+    "Tags": {
+      "name": "Tags",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "text": {
+          "name": "text",
+          "type": "varchar(500)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "Tags_id": {
+          "name": "Tags_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {
+        "Tags_text_unique": {
+          "name": "Tags_text_unique",
+          "columns": [
+            "text"
+          ]
+        }
+      }
+    },
+    "QuestionTagMaps": {
+      "name": "QuestionTagMaps",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "question_id": {
+          "name": "question_id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "tag_id": {
+          "name": "tag_id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "QuestionTagMaps_question_id_Questions_id_fk": {
+          "name": "QuestionTagMaps_question_id_Questions_id_fk",
+          "tableFrom": "QuestionTagMaps",
+          "tableTo": "Questions",
+          "columnsFrom": [
+            "question_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "QuestionTagMaps_tag_id_Tags_id_fk": {
+          "name": "QuestionTagMaps_tag_id_Tags_id_fk",
+          "tableFrom": "QuestionTagMaps",
+          "tableTo": "Tags",
+          "columnsFrom": [
+            "tag_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "QuestionTagMaps_id": {
+          "name": "QuestionTagMaps_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {}
+    },
+    "QuestionAnswerMaps": {
+      "name": "QuestionAnswerMaps",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "answer_id": {
+          "name": "answer_id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "question_id": {
+          "name": "question_id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "QuestionAnswerMaps_answer_id_Answers_id_fk": {
+          "name": "QuestionAnswerMaps_answer_id_Answers_id_fk",
+          "tableFrom": "QuestionAnswerMaps",
+          "tableTo": "Answers",
+          "columnsFrom": [
+            "answer_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "QuestionAnswerMaps_question_id_Questions_id_fk": {
+          "name": "QuestionAnswerMaps_question_id_Questions_id_fk",
+          "tableFrom": "QuestionAnswerMaps",
+          "tableTo": "Questions",
+          "columnsFrom": [
+            "question_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "QuestionAnswerMaps_id": {
+          "name": "QuestionAnswerMaps_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {}
+    }
+  },
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  },
+  "internal": {
+    "tables": {},
+    "indexes": {}
+  }
+}

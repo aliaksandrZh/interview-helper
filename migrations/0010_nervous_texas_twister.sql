@@ -1,0 +1,2 @@
+ALTER TABLE `Questions` ADD `category` int NOT NULL;--> statement-breakpoint
+ALTER TABLE `Questions` ADD CONSTRAINT `Questions_category_Categories_id_fk` FOREIGN KEY (`category`) REFERENCES `Categories`(`id`) ON DELETE no action ON UPDATE no action;
