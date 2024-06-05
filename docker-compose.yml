@@ -39,10 +39,15 @@ services:
       - DB_PASSWORD=rootpassword
       - DB_NAME=nestdb
       - DB_USER=root
+      - NODE_ENV:development
     volumes:
       - .:/app
       - '/app/node_modules'
     ports:
-      - '8888:3000'
+      # App port
+      - 8888:3000
+      # Debug port
+      - 9229:9229
     depends_on:
       - mysql
+    command: yarn run start:debug
