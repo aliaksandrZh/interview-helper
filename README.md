@@ -14,6 +14,11 @@ Swagger `localhost:8888/api`
 
 JSON version: `localhost:8888/api-json`
 
+## Debugger
+
+In VScode run the `interview-helper api` configuration
+Set breakpoints.
+
 ## Errors
 
 ### It's a know issue, will be fixed soon
