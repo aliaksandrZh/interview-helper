@@ -2,9 +2,8 @@ services:
   mysql:
     image: mysql
     container_name: mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: nestdb
+    env_file:
+      - ${ENV_FILE}
     volumes:
       - mysql_data:/var/lib/mysql
 
@@ -32,14 +31,8 @@ services:
     build:
       context: .
       target: local
-    environment:
-      - PORT=3000
-      - DB_HOST=mysql
-      - DB_PORT=3306
-      - DB_PASSWORD=rootpassword
-      - DB_NAME=nestdb
-      - DB_USER=root
-      - NODE_ENV:development
+    env_file:
+      - ${ENV_FILE}
     volumes:
       - .:/app
       - '/app/node_modules'
