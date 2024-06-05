@@ -1,6 +1,6 @@
 import { int, mysqlTable } from 'drizzle-orm/mysql-core';
-import { questions } from './question.schema';
-import { tags } from './tag.schema';
+import { Question, QuestionCandidate, questions } from './question.schema';
+import { Tag, tags } from './tag.schema';
 
 export const questionTagMaps = mysqlTable('QuestionTagMaps', {
   id: int('id').primaryKey().autoincrement(),
@@ -13,3 +13,8 @@ export const questionTagMaps = mysqlTable('QuestionTagMaps', {
 });
 
 export type QuestionTagMap = typeof questionTagMaps.$inferSelect;
+export type QuestionTagMapCandidate = typeof questionTagMaps.$inferInsert;
+export type QuestionCandidateWithTags = QuestionCandidate & {
+  tags: Tag['id'][];
+};
+export type QuestionWithTags = Question & { tags: Tag['id'][] };

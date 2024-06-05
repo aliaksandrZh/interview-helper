@@ -1,6 +1,13 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEnum, IsNotEmpty, IsNumber, Length } from 'class-validator';
-import { Category } from 'src/drizzle/schemas';
+import {
+  IsArray,
+  IsEnum,
+  IsNotEmpty,
+  IsNumber,
+  Length,
+  Min,
+} from 'class-validator';
+import { Category, Tag } from 'src/drizzle/schemas';
 
 export class QuestionCreateDto {
   @ApiProperty()
@@ -14,6 +21,16 @@ export class QuestionCreateDto {
     enum: Category,
   })
   category: Category;
+
+  // TODO: validate is the tags are in the range of db_tags
+  @ApiProperty({
+    type: [Number],
+    required: false,
+  })
+  @IsArray()
+  @IsNumber({}, { each: true })
+  @Min(1, { each: true })
+  tags: Tag['id'][];
 }
 
 export class QuestionUpdateDto extends QuestionCreateDto {
