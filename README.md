@@ -16,7 +16,8 @@ JSON version: `localhost:8888/api-json`
 
 ## Debugger
 
-In VScode run the `interview-helper api` configuration
+In VScode run the `interview-helper api` configuration.
+
 Set breakpoints.
 
 ## Errors
