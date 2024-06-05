@@ -10,13 +10,16 @@ services:
   backup:
     container_name: backup
     image: mysql
-    depends_on:
-      - mysql
+    env_file:
+      - ${ENV_FILE}
     volumes:
       - ./backups:/backup
-    entrypoint: /bin/bash -c "trap 'mysqldump -h mysql -uroot -prootpassword nestdb > /backup/backup_$(date +\"%Y%m%d_%H%M%S\").sql' EXIT && tail -f /dev/null"
+      - ./backup.entry.sh:/backup.entry.sh
     volumes_from:
       - mysql
+    depends_on:
+      - mysql
+    entrypoint: /backup.entry.sh
 
   phpmyadmin:
     image: phpmyadmin

@@ -7,8 +7,10 @@ WORKDIR /app
 # This can leverage Docker’s layer caching to avoid reinstalling dependencies
 # if they haven’t changed.
 
-COPY . .
+COPY package.json yarn.lock ./
 
 RUN yarn
+
+COPY . .
 
 CMD ["yarn", "run", "start:dev"]

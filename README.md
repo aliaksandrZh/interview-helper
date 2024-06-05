@@ -2,6 +2,14 @@
 
 `docker compose up`
 
+## Backups
+
+Backups are created automatically when docker compose script stopped.
+
+If you have `exec /backup.entry.sh: permission denied` issue.
+
+Run the `chmod +x backup.entry.sh` on your host.
+
 ## Migrations
 
 Generate migrations `bash generate.sh`
@@ -20,7 +28,7 @@ In VScode run the `interview-helper api` configuration.
 
 Set breakpoints.
 
-## Dependecies
+## Dependencies
 
 To add a package use `bash isntall-dep.sh`
 
