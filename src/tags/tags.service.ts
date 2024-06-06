@@ -21,4 +21,13 @@ export class TagsService {
   getAll(): Promise<Tag[]> {
     return this.repo.get();
   }
+
+  isAnyTagExist(
+    tags: Tag['id'][] | Tag['text'][],
+    options: {
+      field: keyof Tag;
+    },
+  ) {
+    return this.repo.isAnyTagExist(tags, options);
+  }
 }

@@ -1,5 +1,5 @@
-import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
-import { like, eq } from 'drizzle-orm';
+import { Inject, Injectable } from '@nestjs/common';
+import { eq } from 'drizzle-orm';
 import { Database } from 'src/drizzle/drizzle.interface';
 import { DBToken } from 'src/drizzle/drizzle.provider';
 import { Tag, TagCandidate, tags } from 'src/drizzle/schemas';
@@ -9,16 +9,6 @@ export class TagsRepositoryService {
   constructor(@Inject(DBToken) private db: Database) {}
 
   async create(tag: TagCandidate): Promise<void> {
-    const existedTag = await this.db.query.tags.findFirst({
-      where: like(tags.text, tag.text),
-    });
-    if (existedTag) {
-      throw new HttpException(
-        `Tag with the text ${tag.text} already exists`,
-        HttpStatus.CONFLICT,
-      );
-    }
-
     await this.db.insert(tags).values(tag);
   }
 
@@ -32,5 +22,20 @@ export class TagsRepositoryService {
 
   async get(): Promise<Tag[]> {
     return await this.db.select().from(tags);
+  }
+
+  async isAnyTagExist(
+    tagCandidates: Tag['id'][] | Tag['text'][],
+    options: {
+      field: keyof Tag;
+    },
+  ): Promise<boolean> {
+    if (!tagCandidates) {
+      return true;
+    }
+
+    return !!(await this.db.query.tags.findFirst({
+      where: (tags, { inArray }) => inArray(tags[options.field], tagCandidates),
+    }));
   }
 }
