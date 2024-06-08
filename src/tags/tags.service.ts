@@ -28,6 +28,8 @@ export class TagsService {
       field: keyof Tag;
     },
   ) {
+    if (!tags) return false;
+
     return this.repo.isAnyTagExist(tags, options);
   }
 }

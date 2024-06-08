@@ -30,10 +30,6 @@ export class TagsRepositoryService {
       field: keyof Tag;
     },
   ): Promise<boolean> {
-    if (!tagCandidates) {
-      return true;
-    }
-
     return !!(await this.db.query.tags.findFirst({
       where: (tags, { inArray }) => inArray(tags[options.field], tagCandidates),
     }));
