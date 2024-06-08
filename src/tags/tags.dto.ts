@@ -1,14 +1,14 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsNumber, Length } from 'class-validator';
 import { Tag } from 'src/drizzle/schemas';
-import { IsTagExist } from './tags.validation';
+import { IsTagExist, TagContextValidation } from './tags.validation';
 
 export class TagIdDto {
   @ApiProperty()
   @IsNumber()
   @IsTagExist({
     message: 'Tag $value not found.',
-    context: ['id', true] as [keyof Tag, boolean],
+    context: ['id', true] as TagContextValidation,
   })
   id: number;
 }
@@ -19,7 +19,7 @@ export class TagCreateDto {
   @IsNotEmpty()
   @IsTagExist({
     message: 'Tag $value already exists.',
-    context: ['text', false] as [keyof Tag, boolean],
+    context: ['text', false] as TagContextValidation,
   })
   text: string;
 }

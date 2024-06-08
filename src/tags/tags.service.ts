@@ -28,7 +28,7 @@ export class TagsService {
       field: keyof Tag;
     },
   ) {
-    if (!tags) return false;
+    if (tags.length === 0) return false;
 
     return this.repo.isAnyTagExist(tags, options);
   }

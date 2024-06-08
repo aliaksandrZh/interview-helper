@@ -29,7 +29,7 @@ async function bootstrap() {
       // transform: true,
       // TODO: test white list When set to true, this will automatically remove non-whitelisted properties (those without any decorator in the validation class).
       // whitelist: true,
-      // stopAtFirstError: true,
+      stopAtFirstError: true, // TODO: Doesn't work
     }),
   );
 

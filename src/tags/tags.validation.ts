@@ -9,6 +9,9 @@ import { TagsService } from './tags.service';
 import { Injectable } from '@nestjs/common';
 import { Tag } from 'src/drizzle/schemas';
 
+export type TagContextValidation = [keyof Tag, boolean];
+const tagValidationContextDefault: TagContextValidation = ['id', true];
+
 /**
  * @Injectable is required. Constraint has to be registered in the Nest DI
  * The class should be added to the feature module
@@ -23,9 +26,13 @@ import { Tag } from 'src/drizzle/schemas';
 @Injectable()
 export class IsTagExistConstraint implements ValidatorConstraintInterface {
   constructor(protected readonly tagService: TagsService) {}
-  async validate(value: string, args: ValidationArguments) {
+  async validate(
+    value: string | Tag['id'][] | Tag['text'][],
+    args: ValidationArguments,
+  ) {
     const [field, isExistValid] = args.constraints;
-    const IsTagExist = await this.tagService.isAnyTagExist([value], {
+    const tags = Array.isArray(value) ? value : [value];
+    const IsTagExist = await this.tagService.isAnyTagExist(tags, {
       field,
     });
 
@@ -35,19 +42,24 @@ export class IsTagExistConstraint implements ValidatorConstraintInterface {
 
     return !IsTagExist;
   }
+
+  defaultMessage(): string {
+    return 'Tags are not valid';
+  }
 }
 
 export function IsTagExist(
   validationOptions?: ValidationOptions & {
-    context: [keyof Tag, isExistValid: boolean];
+    context?: TagContextValidation;
   },
 ) {
   return function (object: NonNullable<unknown>, propertyName: string) {
+    const context = validationOptions?.context ?? tagValidationContextDefault;
     registerDecorator({
       target: object.constructor,
       propertyName: propertyName,
       options: validationOptions,
-      constraints: validationOptions.context,
+      constraints: context,
       validator: IsTagExistConstraint,
     });
   };

@@ -1,6 +1,6 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { QuestionRepositoryService } from './questions.repository';
+import { Injectable } from '@nestjs/common';
 import { Question, QuestionCandidateWithTags } from 'src/drizzle/schemas';
+import { QuestionRepositoryService } from './questions.repository';
 
 @Injectable()
 export class QuestionsService {
@@ -8,16 +8,6 @@ export class QuestionsService {
   //TODO: Get
 
   async create(questionCandidate: QuestionCandidateWithTags): Promise<void> {
-    const existedAnswer = await this.repo.findFirstByText(
-      questionCandidate.text,
-    );
-    if (existedAnswer) {
-      throw new HttpException(
-        `The Question ${questionCandidate.text} already exists`,
-        HttpStatus.CONFLICT,
-      );
-    }
-
     return this.repo.create(questionCandidate);
   }
 
@@ -29,5 +19,14 @@ export class QuestionsService {
     // TODO: Delete QuestionTagMap!
     // TODO: Delete answer ?
     return this.repo.delete(id);
+  }
+
+  isQuestionExist(
+    value: Question['id'] | Question['text'],
+    options: {
+      field: keyof Pick<Question, 'id' | 'text'>;
+    },
+  ) {
+    return this.repo.isQuestionExist(value, options);
   }
 }

@@ -10,6 +10,7 @@ import {
   questionTagMaps,
   questions,
 } from 'src/drizzle/schemas';
+import { QuestionValidationContextKeys } from './questions.type';
 
 @Injectable()
 export class QuestionRepositoryService {
@@ -50,6 +51,17 @@ export class QuestionRepositoryService {
     return tags.map((tagId) => ({
       questionId,
       tagId,
+    }));
+  }
+
+  async isQuestionExist(
+    question: Question['id'] | Question['text'],
+    options: {
+      field: QuestionValidationContextKeys;
+    },
+  ) {
+    return !!(await this.db.query.questions.findFirst({
+      where: (questions, { eq }) => eq(questions[options.field], question),
     }));
   }
 }
